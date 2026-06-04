@@ -111,6 +111,10 @@
       color: #bbbbbb;
     }
 
+    .mobile-footer {
+      display: none;
+    }
+
     /* Right Content Panel */
     .content-panel {
       flex-grow: 1;
@@ -245,7 +249,7 @@
       font-size: 14px;
       line-height: 1.8;
       margin-bottom: 24px;
-      text-align: justify;
+      text-align: left;
     }
 
     .statement-text {
@@ -466,12 +470,32 @@
         width: auto;
       }
 
+      .sidebar .footer {
+        display: none;
+      }
+
       .gallery-item-details {
         width: 260px;
         min-width: 260px;
         height: auto;
         min-height: 0;
         align-self: auto;
+      }
+
+      .mobile-footer {
+        display: block;
+        width: 100%;
+        padding: 40px 30px;
+        font-size: 12px;
+        color: #999999;
+        line-height: 1.8;
+        background-color: #ffffff;
+      }
+
+      .mobile-footer .footer-link {
+        display: block;
+        margin-top: 4px;
+        color: #bbbbbb;
       }
 
       .about-container {
@@ -533,7 +557,7 @@
       <!-- Home View (scrolling strip) -->
       <section id="page-home" class="page-section">
         <div class="home-strip-container horizontal-gallery">
-          <div class="gallery-item">
+          <div class="gallery-item" style="height: 596px; min-height: 596px;">
             <div class="gallery-image-wrapper" style="height: 100%;">
               <img src="Home/Artboard 1.png" alt="home strip" class="home-strip-image" style="height: 100%; cursor: zoom-in;">
             </div>
@@ -850,6 +874,13 @@
       </section>
 
     </main>
+
+    <!-- Mobile Footer (visible on mobile only below content panel) -->
+    <footer class="mobile-footer">
+      <div>© francisco pereira</div>
+      <a href="https://franciscopereira.art" target="_blank" class="footer-link">franciscopereira.art</a>
+      <a href="https://www.instagram.com/franciscopereira.art/" target="_blank" class="footer-link">instagram</a>
+    </footer>
 
   </div>
 
