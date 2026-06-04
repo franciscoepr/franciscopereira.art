@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>francisco pereira</title>
+  
+  <!-- Geist Mono Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* Clean Minimalist Artsy Resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #111111;
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden; /* Prevent body scroll, custom panes handle it */
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.5;
+    }
+
+    /* Layout structure */
+    .app-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 280px;
+      min-width: 280px;
+      height: 100%;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid transparent; /* Keeps layout spacing */
+      user-select: none;
+    }
+
+    .brand {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .navigation {
+      margin-top: -60px; /* Pulls menu up slightly */
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-link {
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .works-submenu {
+      list-style: none;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 16px; /* Indent works sub-items */
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #999999;
+      line-height: 1.8;
+    }
+
+    .footer-link {
+      display: block;
+      margin-top: 4px;
+      color: #bbbbbb;
+    }
+
+    /* Right Content Panel */
+    .content-panel {
+      flex-grow: 1;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-section {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      display: flex;
+      align-items: center;
+      padding: 40px 60px;
+      overflow-y: auto;
+    }
+
+    .page-section.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+    }
+
+    /* Horizontal Scrolling Containers (Home & Works Series) */
+    .horizontal-gallery {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scrollbar-width: none; /* Hide scrollbar Firefox */
+      -ms-overflow-style: none;  /* Hide scrollbar IE/Edge */
+    }
+
+    .horizontal-gallery::-webkit-scrollbar {
+      display: none; /* Hide scrollbar Chrome/Safari */
+    }
+
+    /* Homepage Long Scrolling Strip */
+    .home-strip-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    
+    .home-strip-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .home-strip-image {
+      height: 22vh;
+      max-height: 180px;
+      min-height: 120px;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    /* Individual Art Gallery Image style */
+    .gallery-item {
+      height: 48vh;
+      max-height: 460px;
+      min-height: 260px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .gallery-item img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      background-color: #fdfdfd;
+      border: 1px solid #f2f2f2;
+    }
+
+    /* Text Content Views (About, CV) */
+    .text-content-wrapper {
+      max-width: 680px;
+      width: 100%;
+      margin: auto 0; /* Center vertically but align left */
+      padding-right: 40px;
+    }
+
+    .bio-text {
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      text-align: justify;
+    }
+
+    .statement-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #666666;
+      margin-top: 30px;
+      border-left: 2px solid #eaeaea;
+      padding-left: 20px;
+    }
+
+    /* CV Sectioning */
+    .cv-container {
+      margin-top: 20px;
+    }
+
+    .cv-section {
+      margin-bottom: 35px;
+    }
+
+    .cv-section h2 {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      text-transform: lowercase;
+    }
+
+    .cv-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cv-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    .cv-year {
+      min-width: 60px;
+      color: #888888;
+    }
+
+    .cv-detail {
+      flex-grow: 1;
+    }
+
+    /* Contact view */
+    .contact-info {
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .contact-info p {
+      margin-bottom: 16px;
+    }
+
+    .contact-info a {
+      border-bottom: 1px solid #111111;
+      padding-bottom: 2px;
+    }
+
+    /* Mobile Responsive Adaptation */
+    @media (max-width: 768px) {
+      body {
+        overflow-y: auto; /* Allow normal scrolling on mobile */
+      }
+
+      .app-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        padding: 40px 30px 20px 30px;
+        gap: 30px;
+      }
+
+      .navigation {
+        margin-top: 0;
+      }
+
+      .footer {
+        margin-top: 20px;
+      }
+
+      .content-panel {
+        height: auto;
+        flex-grow: 1;
+        overflow: visible;
+      }
+
+      .page-section {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        visibility: visible;
+        display: none; /* Controlled by display block/none in mobile active */
+        padding: 20px 30px 60px 30px;
+        height: auto;
+        overflow: visible;
+      }
+
+      .page-section.active {
+        display: block;
+      }
+
+      /* Mobile horizontal layouts still scroll */
+      .horizontal-gallery {
+        height: auto;
+        padding: 10px 0;
+        gap: 20px;
+      }
+
+      .gallery-item {
+        height: 35vh;
+        max-height: 300px;
+        min-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation Rail -->
+    <aside class="sidebar">
+      <div class="brand">
+        <a href="#home">francisco pereira</a>
+      </div>
+      
+      <nav class="navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#about" class="nav-link" id="link-about">about</a>
+          </li>
+          <li class="nav-item">
+            <a href="#cv" class="nav-link" id="link-cv">cv</a>
+          </li>
+          <li class="nav-item">
+            <span class="nav-link" style="cursor: default; opacity: 1;">works</span>
+            <ul class="works-submenu">
+              <li><a href="#works/timeworks" class="nav-link" id="link-works-timeworks">timeworks</a></li>
+              <li><a href="#works/on_paper" class="nav-link" id="link-works-on_paper">on paper</a></li>
+              <li><a href="#works/landscapes" class="nav-link" id="link-works-landscapes">landscapes</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link" id="link-contact">contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="footer">
+        <div>© francisco pereira</div>
+        <a href="https://franciscopereira.art" target="_blank" class="footer-link">franciscopereira.art</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="content-panel">
+      
+      <!-- Home View (scrolling strip) -->
+      <section id="page-home" class="page-section">
+        <div class="home-strip-container horizontal-gallery">
+          <img src="Works.[timeworks]/[tw].strip.png" alt="timeworks strip" class="home-strip-image">
+        </div>
+      </section>
+
+      <!-- About Page -->
+      <section id="page-about" class="page-section">
+        <div class="text-content-wrapper">
+          <div class="bio-text">
+            francisco pereira is a visual artist born in brasília, brazil. he has lived and worked in barcelona since 2019, where he completed a master's in art history at the university of barcelona in 2021. since 2022, he has taken part in collective and solo exhibitions.
+          </div>
+          <div class="statement-text">
+            elemental geometric forms derived from architecture and traditional tiles — particularly the triangular mosaics shared between barcelona and brasília — serve as matrices. as they repeat and fragment, the publication space and architectural surfaces become sites of investigation.
+          </div>
+        </div>
+      </section>
+
+      <!-- CV Page -->
+      <section id="page-cv" class="page-section">
+        <div class="text-content-wrapper cv-container">
+          
+          <div class="cv-section">
+            <h2>education</h2>
+            <ul class="cv-list">
+              <li class="cv-row">
+                <span class="cv-year">2021</span>
+                <span class="cv-detail">master's in art history, university of barcelona</span>
+              </li>
+              <li class="cv-row">
+                <span class="cv-year">2018</span>
+                <span class="cv-detail">bachelor's in fine arts, university of brasília</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="cv-section">
+            <h2>exhibitions</h2>
+            <ul class="cv-list">
+              <li class="cv-row">
+                <span class="cv-year">2024</span>
+                <span class="cv-detail">solo exhibition, <i>timeworks</i>, barcelona</span>
+              </li>
+              <li class="cv-row">
+                <span class="cv-year">2023</span>
+                <span class="cv-detail">group exhibition, <i>on paper</i>, galería de arte, madrid</span>
+              </li>
+              <li class="cv-row">
+                <span class="cv-year">2022</span>
+                <span class="cv-detail">group exhibition, <i>landscapes & geometry</i>, barcelona</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Works - Timeworks -->
+      <section id="page-works-timeworks" class="page-section">
+        <div class="horizontal-gallery">
+          <div class="gallery-item">
+            <img src="Works.[timeworks]/[tw].001.jpg" alt="timeworks 001">
+          </div>
+          <div class="gallery-item">
+            <img src="Works.[timeworks]/[tw].002.jpg" alt="timeworks 002">
+          </div>
+          <div class="gallery-item">
+            <img src="Works.[timeworks]/[tw].003.jpg" alt="timeworks 003">
+          </div>
+        </div>
+      </section>
+
+      <!-- Works - On Paper -->
+      <section id="page-works-on_paper" class="page-section">
+        <div class="horizontal-gallery">
+          <div class="gallery-item">
+            <img src="Works.on_paper/op.001.jpg" alt="on paper 001">
+          </div>
+          <div class="gallery-item">
+            <img src="Works.on_paper/op.002.jpg" alt="on paper 002">
+          </div>
+          <div class="gallery-item">
+            <img src="Works.on_paper/op.003.jpg" alt="on paper 003">
+          </div>
+          <div class="gallery-item">
+            <img src="Works.on_paper/op.004.jpg" alt="on paper 004">
+          </div>
+        </div>
+      </section>
+
+      <!-- Works - Landscapes -->
+      <section id="page-works-landscapes" class="page-section">
+        <div class="horizontal-gallery">
+          <div class="gallery-item">
+            <img src="Works.Landscapes/ls.001.jpg" alt="landscapes 001">
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Page -->
+      <section id="page-contact" class="page-section">
+        <div class="text-content-wrapper contact-info">
+          <p>for studio visits, exhibitions, and enquiries, please contact:</p>
+          <p><a href="mailto:info@franciscopereira.art">info@franciscopereira.art</a></p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    // Navigation / Router Logic
+    function handleRouting() {
+      const hash = window.location.hash || '#home';
+      
+      // Map hash to page section ID
+      let targetSectionId = 'page-home';
+      if (hash === '#about') targetSectionId = 'page-about';
+      else if (hash === '#cv') targetSectionId = 'page-cv';
+      else if (hash === '#works/timeworks') targetSectionId = 'page-works-timeworks';
+      else if (hash === '#works/on_paper') targetSectionId = 'page-works-on_paper';
+      else if (hash === '#works/landscapes') targetSectionId = 'page-works-landscapes';
+      else if (hash === '#contact') targetSectionId = 'page-contact';
+      
+      // Update active class on sections
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(sec => {
+        if (sec.id === targetSectionId) {
+          sec.classList.add('active');
+          // Reset scroll offset when entering page
+          sec.scrollTop = 0;
+          const gall = sec.querySelector('.horizontal-gallery');
+          if (gall) gall.scrollLeft = 0;
+        } else {
+          sec.classList.remove('active');
+        }
+      });
+
+      // Update bracket active indicators in sidebar
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        // Retrieve base text (remove any existing square brackets and trim)
+        let baseText = link.getAttribute('data-base-text');
+        if (!baseText) {
+          baseText = link.textContent.replace(/[\[\]]/g, '').trim();
+          link.setAttribute('data-base-text', baseText);
+        }
+
+        const href = link.getAttribute('href');
+        if (href === hash) {
+          link.textContent = `[${baseText}]`;
+          link.style.opacity = '1';
+        } else {
+          link.textContent = baseText;
+          link.style.opacity = '';
+        }
+      });
+    }
+
+    // Set up listeners
+    window.addEventListener('hashchange', handleRouting);
+    window.addEventListener('DOMContentLoaded', () => {
+      handleRouting();
+      
+      // Convert vertical scroll on horizontal gallery to horizontal offset
+      const galleries = document.querySelectorAll('.horizontal-gallery');
+      galleries.forEach(gallery => {
+        gallery.addEventListener('wheel', (e) => {
+          if (e.deltaY !== 0) {
+            e.preventDefault();
+            // Perform standard pixel scroll multiplier for smooth wheel experience
+            gallery.scrollLeft += e.deltaY;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
