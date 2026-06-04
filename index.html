@@ -179,11 +179,9 @@
     .gallery-item {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-end; /* Position in the bottom half */
       gap: 40px;
-      height: 48vh;
-      max-height: 460px;
-      min-height: 260px;
+      height: 596px; /* Keep home strip original size height */
       flex-shrink: 0;
     }
 
@@ -203,7 +201,10 @@
     .gallery-item-details {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
+      align-self: flex-end;
+      height: 50%; /* Positioned on the bottom half */
+      min-height: 298px; /* Minimum length of half the 596px picture */
       width: 280px;
       min-width: 280px;
       white-space: normal;
@@ -230,19 +231,7 @@
       margin-bottom: 20px;
     }
 
-    .details-divider {
-      width: 40px;
-      border-bottom: 1px solid #cccccc;
-      margin-bottom: 20px;
-    }
 
-    .details-description {
-      font-size: 12px;
-      line-height: 1.6;
-      font-style: italic;
-      color: #555555;
-      text-align: justify;
-    }
 
     /* Text Content Views (About, CV) */
     .text-content-wrapper {
@@ -480,6 +469,9 @@
       .gallery-item-details {
         width: 260px;
         min-width: 260px;
+        height: auto;
+        min-height: 0;
+        align-self: auto;
       }
 
       .about-container {
@@ -541,7 +533,7 @@
       <!-- Home View (scrolling strip) -->
       <section id="page-home" class="page-section">
         <div class="home-strip-container horizontal-gallery">
-          <div class="gallery-item" style="height: 596px; max-height: none; min-height: none;">
+          <div class="gallery-item">
             <div class="gallery-image-wrapper" style="height: 100%;">
               <img src="Home/Artboard 1.png" alt="home strip" class="home-strip-image" style="height: 100%; cursor: zoom-in;">
             </div>
@@ -552,10 +544,6 @@
                 <div>2025</div>
                 <div>20 cyanotypes on cotton paper</div>
                 <div>60 × 80 cm (framed)</div>
-              </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                twenty prints record the full arc of a square's decay — from solid, clearly defined form to fragmented, barely legible remnant. framed together, the work functions as both sequence and archive.
               </div>
             </div>
           </div>
@@ -690,10 +678,6 @@
                 <div>cyanotype on cotton paper</div>
                 <div>40 × 50 cm</div>
               </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                investigating the passage of time through consecutive solar exposures of a single geometric pattern.
-              </div>
             </div>
           </div>
           <div class="gallery-item">
@@ -708,10 +692,6 @@
                 <div>cyanotype on cotton paper</div>
                 <div>40 × 50 cm</div>
               </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                variations in sunlight intensity recorded on successive prints, highlighting atmospheric inconsistencies.
-              </div>
             </div>
           </div>
           <div class="gallery-item">
@@ -725,10 +705,6 @@
                 <div>2025</div>
                 <div>cyanotype on cotton paper</div>
                 <div>40 × 50 cm</div>
-              </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                final state of the matrix showing signs of material degradation and dust accumulations.
               </div>
             </div>
           </div>
@@ -750,10 +726,6 @@
                 <div>cyanotype and pencil on paper</div>
                 <div>30 × 42 cm</div>
               </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                exploring architectural grids and their alignment with natural light vectors on heavy rag paper.
-              </div>
             </div>
           </div>
           <div class="gallery-item">
@@ -767,10 +739,6 @@
                 <div>2024</div>
                 <div>cyanotype and pencil on paper</div>
                 <div>30 × 42 cm</div>
-              </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                layering of exposure times to create depth gradients within two-dimensional space.
               </div>
             </div>
           </div>
@@ -786,10 +754,6 @@
                 <div>cyanotype and pencil on paper</div>
                 <div>30 × 42 cm</div>
               </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                juxtaposing crisp geometric borders with the fluid, organic edges of the cyanotype emulsion.
-              </div>
             </div>
           </div>
           <div class="gallery-item">
@@ -803,10 +767,6 @@
                 <div>2024</div>
                 <div>cyanotype and pencil on paper</div>
                 <div>30 × 42 cm</div>
-              </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                an investigation into the visual memory of the paper surface under varying humidity conditions.
               </div>
             </div>
           </div>
@@ -822,10 +782,6 @@
                 <div>cyanotype and pencil on paper</div>
                 <div>30 × 42 cm</div>
               </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                microscopic shifts in placement resulting in double-exposure outlines and shadows.
-              </div>
             </div>
           </div>
           <div class="gallery-item">
@@ -839,10 +795,6 @@
                 <div>2024</div>
                 <div>cyanotype and pencil on paper</div>
                 <div>30 × 42 cm</div>
-              </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                a minimal composition highlighting the contrast between raw paper fiber and deep prussian blue.
               </div>
             </div>
           </div>
@@ -863,10 +815,6 @@
                 <div>2023</div>
                 <div>cyanotype on watercolor paper</div>
                 <div>50 × 70 cm</div>
-              </div>
-              <div class="details-divider"></div>
-              <div class="details-description">
-                a landscape-scale exposure tracing the movement of the sun over a three-hour period.
               </div>
             </div>
           </div>
