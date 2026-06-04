@@ -188,6 +188,7 @@
       height: 100%;
       width: auto;
       object-fit: contain;
+      cursor: zoom-in;
     }
 
     /* Text Content Views (About, CV) */
@@ -237,6 +238,7 @@
       height: auto;
       max-height: 480px;
       object-fit: cover;
+      cursor: zoom-in;
     }
 
     /* CV Sectioning */
@@ -732,7 +734,44 @@
           }
         });
       });
+
+      // Lightbox Zoom Logic
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const lightboxImg = document.getElementById('lightbox-img');
+
+      // Attach click listeners to gallery and biography images
+      document.querySelectorAll('.gallery-item img, .about-image').forEach(img => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightboxModal.style.visibility = 'visible';
+          lightboxModal.style.opacity = '1';
+        });
+      });
+
+      // Close lightbox on click
+      lightboxModal.addEventListener('click', () => {
+        lightboxModal.style.opacity = '0';
+        setTimeout(() => {
+          lightboxModal.style.visibility = 'hidden';
+          lightboxImg.src = '';
+        }, 300);
+      });
+
+      // Close lightbox on Escape key
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxModal.style.opacity === '1') {
+          lightboxModal.style.opacity = '0';
+          setTimeout(() => {
+            lightboxModal.style.visibility = 'hidden';
+            lightboxImg.src = '';
+          }, 300);
+        }
+      });
     });
   </script>
+  <!-- Lightbox Zoom Modal -->
+  <div id="lightbox-modal" style="position: fixed; inset: 0; background-color: #ffffff; z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; cursor: zoom-out;">
+    <img id="lightbox-img" src="" alt="zoomed image" style="max-width: 90vw; max-height: 90vh; object-fit: contain; user-select: none;">
+  </div>
 </body>
 </html>
