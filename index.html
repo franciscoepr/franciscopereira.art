@@ -212,6 +212,31 @@
       padding-left: 20px;
     }
 
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      gap: 60px;
+      align-items: flex-start;
+      max-width: 1000px;
+      width: 100%;
+      margin: auto 0;
+    }
+
+    .about-text-column {
+      flex: 1 1 55%;
+    }
+
+    .about-image-column {
+      flex: 1 1 45%;
+    }
+
+    .about-image {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: cover;
+    }
+
     /* CV Sectioning */
     .cv-container {
       margin-top: 20px;
@@ -378,6 +403,18 @@
         max-height: 300px;
         min-height: 200px;
       }
+
+      .about-container {
+        flex-direction: column;
+        gap: 30px;
+        margin: 0;
+      }
+      .about-text-column, .about-image-column {
+        width: 100%;
+      }
+      .about-image {
+        max-height: 350px;
+      }
     }
   </style>
 </head>
@@ -431,12 +468,19 @@
 
       <!-- About Page -->
       <section id="page-about" class="page-section">
-        <div class="text-content-wrapper">
-          <div class="bio-text">
-            francisco pereira is a visual artist born in brasília, brazil. he has lived and worked in barcelona since 2019, where he completed a master's in art history at the university of barcelona in 2021. since 2022, he has taken part in collective and solo exhibitions.
+        <div class="about-container">
+          <!-- Left Part: Text -->
+          <div class="about-text-column">
+            <div class="bio-text">
+              Francisco Pereira (1990, São Paulo) is a visual artist and art historian. His practice develops primarily through cyanotype, a photographic process activated by sunlight. Starting always from a single matrix, he reprints it in series, letting the misalignments, errors and variations that each new exposure inscribes on the paper accumulate. What emerges from this process are not exact reproductions, but the memory and trace that specific conditions leave on the surface. Time, movement and subtle transformation operate here not as context, but as the incorporeal materials the work is made of.
+            </div>
+            <div class="bio-text" style="margin-bottom: 0;">
+              He has lived and worked in Barcelona since 2019, where he completed a Master's in Art History at the University of Barcelona in 2021. Since 2022, he has taken part in collective exhibitions and cultural mediation projects in the city, presenting work at La Capella (2022), Centre Cívic Torre Llobeta (2024 and 2025), and Magber Gallery (2026).
+            </div>
           </div>
-          <div class="statement-text">
-            elemental geometric forms derived from architecture and traditional tiles — particularly the triangular mosaics shared between barcelona and brasília — serve as matrices. as they repeat and fragment, the publication space and architectural surfaces become sites of investigation.
+          <!-- Right Part: Image -->
+          <div class="about-image-column">
+            <img src="About/Screenshot 2026-06-04 at 17.59.33.png" alt="Francisco Pereira" class="about-image">
           </div>
         </div>
       </section>
