@@ -723,7 +723,6 @@
               <img src="Works.[timeworks]/[tw].001.jpg" alt="timeworks 001">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">01 / 05</div>
               <h3 class="details-title">untitled I</h3>
               <div class="details-meta">
                 <div>2025</div>
@@ -737,7 +736,6 @@
               <img src="Works.[timeworks]/[tw].002.jpg" alt="timeworks 002">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">02 / 05</div>
               <h3 class="details-title">untitled II</h3>
               <div class="details-meta">
                 <div>2025</div>
@@ -751,7 +749,6 @@
               <img src="Works.[timeworks]/[tw].003.jpg" alt="timeworks 003">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">03 / 05</div>
               <h3 class="details-title">untitled III</h3>
               <div class="details-meta">
                 <div>2025</div>
@@ -765,7 +762,6 @@
               <img src="Works.[timeworks]/tw.004.jpg" alt="timeworks 004">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">04 / 05</div>
               <h3 class="details-title">untitled IV</h3>
               <div class="details-meta">
                 <div>2024</div>
@@ -779,7 +775,6 @@
               <img src="Works.[timeworks]/tw.005.jpg" alt="timeworks 005">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">05 / 05</div>
               <h3 class="details-title">untitled V</h3>
               <div class="details-meta">
                 <div>2024</div>
@@ -788,6 +783,12 @@
               </div>
             </div>
           </div>
+        </div>
+        <!-- Scroll indicator arrow -->
+        <div class="scroll-hint">
+          <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H78M78 6L73 1M78 6L73 11" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </section>
 
@@ -799,7 +800,6 @@
               <img src="Works.on_paper/op.001.jpg" alt="on paper 001">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">01 / 04</div>
               <h3 class="details-title">untitled I</h3>
               <div class="details-meta">
                 <div>2024</div>
@@ -813,7 +813,6 @@
               <img src="Works.on_paper/op.002.jpg" alt="on paper 002">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">02 / 04</div>
               <h3 class="details-title">untitled II</h3>
               <div class="details-meta">
                 <div>2024</div>
@@ -827,7 +826,6 @@
               <img src="Works.on_paper/op.003.jpg" alt="on paper 003">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">03 / 04</div>
               <h3 class="details-title">untitled III</h3>
               <div class="details-meta">
                 <div>2024</div>
@@ -841,7 +839,6 @@
               <img src="Works.on_paper/op.004.jpg" alt="on paper 004">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">04 / 04</div>
               <h3 class="details-title">untitled IV</h3>
               <div class="details-meta">
                 <div>2024</div>
@@ -850,6 +847,12 @@
               </div>
             </div>
           </div>
+        </div>
+        <!-- Scroll indicator arrow -->
+        <div class="scroll-hint">
+          <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H78M78 6L73 1M78 6L73 11" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </section>
 
@@ -861,7 +864,6 @@
               <img src="Works.Landscapes/ls.001.jpg" alt="landscapes 001">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">01 / 01</div>
               <h3 class="details-title">untitled I</h3>
               <div class="details-meta">
                 <div>2023</div>
@@ -870,6 +872,12 @@
               </div>
             </div>
           </div>
+        </div>
+        <!-- Scroll indicator arrow -->
+        <div class="scroll-hint">
+          <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H78M78 6L73 1M78 6L73 11" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </section>
 
@@ -983,20 +991,25 @@
         });
       });
 
-      // Homepage scroll-hint auto-fade
-      const homeStrip = document.querySelector('.home-strip-container');
-      const scrollHint = document.querySelector('.scroll-hint');
-      if (homeStrip && scrollHint) {
-        homeStrip.addEventListener('scroll', () => {
-          if (homeStrip.scrollLeft > 30) {
-            scrollHint.style.opacity = '0';
-            scrollHint.style.visibility = 'hidden';
-          } else {
-            scrollHint.style.opacity = '1';
-            scrollHint.style.visibility = 'visible';
-          }
-        });
-      }
+      // Homepage and works galleries scroll-hint auto-fade
+      const sectionsWithHints = ['page-home', 'page-works-timeworks', 'page-works-on_paper', 'page-works-landscapes'];
+      sectionsWithHints.forEach(secId => {
+        const sec = document.getElementById(secId);
+        if (!sec) return;
+        const gallery = sec.querySelector('.horizontal-gallery');
+        const hint = sec.querySelector('.scroll-hint');
+        if (gallery && hint) {
+          gallery.addEventListener('scroll', () => {
+            if (gallery.scrollLeft > 30) {
+              hint.style.opacity = '0';
+              hint.style.visibility = 'hidden';
+            } else {
+              hint.style.opacity = '1';
+              hint.style.visibility = 'visible';
+            }
+          });
+        }
+      });
 
       // Lightbox Zoom Logic
       const lightboxModal = document.getElementById('lightbox-modal');
