@@ -179,6 +179,24 @@
       cursor: zoom-in;
     }
 
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      color: #999999;
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .scroll-hint svg {
+      stroke: #999999;
+    }
+
     /* Individual Art Gallery Image style */
     .gallery-item {
       display: flex;
@@ -509,6 +527,10 @@
       .about-image {
         max-height: 350px;
       }
+
+      .scroll-hint {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -562,15 +584,20 @@
               <img src="Home/Artboard 1.png" alt="home strip" class="home-strip-image" style="height: 100%; cursor: zoom-in;">
             </div>
             <div class="gallery-item-details">
-              <div class="details-index">01 / 04</div>
-              <h3 class="details-title">sin título I</h3>
+              <h3 class="details-title">pilar mini</h3>
               <div class="details-meta">
                 <div>2025</div>
-                <div>20 cyanotypes on cotton paper</div>
-                <div>60 × 80 cm (framed)</div>
+                <div>14,5 x 19 cm (each)</div>
               </div>
             </div>
           </div>
+        </div>
+        <!-- Scroll indicator arrow -->
+        <div class="scroll-hint">
+          <span>scroll</span>
+          <svg width="80" height="12" viewBox="0 0 80 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H78M78 6L73 1M78 6L73 11" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </section>
 
@@ -955,6 +982,21 @@
           }
         });
       });
+
+      // Homepage scroll-hint auto-fade
+      const homeStrip = document.querySelector('.home-strip-container');
+      const scrollHint = document.querySelector('.scroll-hint');
+      if (homeStrip && scrollHint) {
+        homeStrip.addEventListener('scroll', () => {
+          if (homeStrip.scrollLeft > 30) {
+            scrollHint.style.opacity = '0';
+            scrollHint.style.visibility = 'hidden';
+          } else {
+            scrollHint.style.opacity = '1';
+            scrollHint.style.visibility = 'visible';
+          }
+        });
+      }
 
       // Lightbox Zoom Logic
       const lightboxModal = document.getElementById('lightbox-modal');
