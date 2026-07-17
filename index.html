@@ -253,6 +253,23 @@
       margin-bottom: 20px;
     }
 
+    /* Multiple artwork descriptions shown side by side */
+    .gallery-item-details.details-wide {
+      width: auto;
+      min-width: 0;
+    }
+
+    .details-columns {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+    }
+
+    .details-column {
+      width: 200px;
+      min-width: 200px;
+    }
+
 
 
     /* Text Content Views (About, CV) */
@@ -498,6 +515,21 @@
         height: auto;
         min-height: 0;
         align-self: auto;
+      }
+
+      .gallery-item-details.details-wide {
+        width: 260px;
+        min-width: 260px;
+      }
+
+      .details-columns {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .details-column {
+        width: auto;
+        min-width: 0;
       }
 
       .mobile-footer {
@@ -873,12 +905,35 @@
             <div class="gallery-image-wrapper">
               <img src="Works.Landscapes/ls.001.jpg" alt="landscapes 001">
             </div>
-            <div class="gallery-item-details">
-              <h3 class="details-title">untitled I</h3>
-              <div class="details-meta">
-                <div>2023</div>
-                <div>cyanotype on watercolor paper</div>
-                <div>50 × 70 cm</div>
+            <div class="gallery-item-details details-wide">
+              <div class="details-columns">
+                <div class="details-column">
+                  <h3 class="details-title">fluid landscape III</h3>
+                  <div class="details-meta">
+                    <div>2026</div>
+                    <div>unique piece</div>
+                    <div>cyanotype on 185 g/m² cotton paper</div>
+                    <div>28,5 × 32 cm</div>
+                  </div>
+                </div>
+                <div class="details-column">
+                  <h3 class="details-title">fluid landscape I</h3>
+                  <div class="details-meta">
+                    <div>2026</div>
+                    <div>cyanotype on 185 g/m² cotton paper</div>
+                    <div>edition of 12</div>
+                    <div>28,5 × 32 cm</div>
+                  </div>
+                </div>
+                <div class="details-column">
+                  <h3 class="details-title">fluid landscape II</h3>
+                  <div class="details-meta">
+                    <div>2026</div>
+                    <div>cyanotype on 185 g/m² cotton paper</div>
+                    <div>edition of 12</div>
+                    <div>28,5 × 32 cm</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
